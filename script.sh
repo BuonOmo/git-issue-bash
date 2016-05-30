@@ -1,6 +1,6 @@
 #Check if it is a git repo
 if ! [ -d .git ]
-then 
+then
 	echo "fatal: Not a git repository"
 	return 1
 fi
@@ -10,9 +10,13 @@ repo=$(git config --get remote.origin.url)
 repo=$(echo $repo | awk -F : '{print $2}')
 repo=$(echo $repo | awk -F . '{print $1}')
 
-test -e /tmp/issue_content && rm /tmp/issue_content
 touch /tmp/issue_content
+echo "### title of the issue ###"  > /tmp/issue_content
+echo ""                           >> /tmp/issue_content
+echo "### body of the issue  ###" >> /tmp/issue_content
 $EDITOR /tmp/issue_content || vi /tmp/issue_content || nano /tmp/issue_content
+
+cat /tmp/issue_content | sed 2d | grep -ve ^# > /tmp/issue_content
 
 
 if [ $(cat /tmp/issue_content | wc -l) -lt 1 ]
