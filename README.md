@@ -12,7 +12,3 @@ Just run this on your terminal
 If you are using zsh you can use `zstyle` to complete git completion, by adding this to your .zshrc (or somewhere zsh will read it !)
 
     zstyle ':completion:*:*:git:*' user-commands issue:'report an issue on github'
-
-### Conflict
-
-there will be some
